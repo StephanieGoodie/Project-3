@@ -54,7 +54,7 @@ export class TvApp extends LitElement {
               title="${item.title}"
               presenter="${item.metadata.author}"
               description="${item.description}"
-              video="https://www.youtube.com/watch?v=eC7xzavzEKY"
+              video="${item.metadata.source}"
               @click="${this.itemClick}"
             >
             </tv-channel>
@@ -66,12 +66,12 @@ export class TvApp extends LitElement {
       ${this.activeItem.description}
         <!-- video -->
         <iframe
-    width="750"
-    height="400"
-    src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-    frameborder="0"
-    allowfullscreen
-  ></iframe></iframe>
+          width="750"
+          height="400"
+          src="${this.createSource()}" 
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
         <!-- discord / chat - optional -->
       </div>
       <!-- dialog -->
@@ -81,12 +81,25 @@ export class TvApp extends LitElement {
       </sl-dialog>
     `;
   }
-
-  changeVideo() {
+changeVideo() {
     // Update the iframe source URL when an item is clicked
     const iframe = this.shadowRoot.querySelector('iframe');
-    iframe.src = this.activeItem.video;
+    iframe.src = this.createSource();
   }
+   extractVideoId(link) {
+    try {
+      const url = new URL(link);
+      const searchParams = new URLSearchParams(url.search);
+      return searchParams.get("v");
+    } catch (error) {
+      console.error("Invalid URL:", link);
+      return null;
+    }
+  }
+  createSource() {
+    return "https://www.youtube.com/embed/" + this.extractVideoId(this.activeItem.video);
+  }
+  
   closeDialog(e) {
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.hide();

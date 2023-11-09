@@ -54,6 +54,7 @@ export class TvApp extends LitElement {
               title="${item.title}"
               presenter="${item.metadata.author}"
               description="${item.description}"
+              video="https://www.youtube.com/watch?v=eC7xzavzEKY"
               @click="${this.itemClick}"
             >
             </tv-channel>
@@ -64,6 +65,13 @@ export class TvApp extends LitElement {
       ${this.activeItem.name}
       ${this.activeItem.description}
         <!-- video -->
+        <iframe
+    width="750"
+    height="400"
+    src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+    frameborder="0"
+    allowfullscreen
+  ></iframe></iframe>
         <!-- discord / chat - optional -->
       </div>
       <!-- dialog -->
@@ -74,6 +82,11 @@ export class TvApp extends LitElement {
     `;
   }
 
+  changeVideo() {
+    // Update the iframe source URL when an item is clicked
+    const iframe = this.shadowRoot.querySelector('iframe');
+    iframe.src = this.activeItem.video;
+  }
   closeDialog(e) {
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.hide();
@@ -85,7 +98,9 @@ export class TvApp extends LitElement {
       title: e.target.title,
       id: e.target.id,
       description: e.target.description,
+      video: e.target.video, // Set the source in the activeItem
     };
+    this.changeVideo(); // Call the changeVideo method
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.show();
   }

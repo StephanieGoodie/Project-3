@@ -76,13 +76,12 @@ export class TvApp extends LitElement {
       </div>
       <!-- dialog -->
       <sl-dialog label="Dialog" class="dialog">
-      ${this.activeItem.title}
+      ${this.activeItem.title},
         <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
       </sl-dialog>
     `;
   }
 changeVideo() {
-    // Update the iframe source URL when an item is clicked
     const iframe = this.shadowRoot.querySelector('iframe');
     iframe.src = this.createSource();
   }
@@ -111,9 +110,9 @@ changeVideo() {
       title: e.target.title,
       id: e.target.id,
       description: e.target.description,
-      video: e.target.video, // Set the source in the activeItem
+      video: e.target.video, 
     };
-    this.changeVideo(); // Call the changeVideo method
+    this.changeVideo(); // Call changeVideo 
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.show();
   }

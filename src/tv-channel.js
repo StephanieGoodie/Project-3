@@ -16,6 +16,7 @@ export class TvChannel extends LitElement {
   static get properties() {
     return {
       title: { type: String },
+      description: {type: String},
       presenter: { type: String },
       video: {type: String},
     };

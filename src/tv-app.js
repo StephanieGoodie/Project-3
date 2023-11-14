@@ -93,9 +93,9 @@ export class TvApp extends LitElement {
       }
       </div>
       <div>
-        <div class="title-container">
+        <h1 class="title-container">
       ${this.activeItem.title}
-    </div>
+    </h1>
     <div style="display: inline-flex">
         <!-- video -->
         <iframe style="margin: 30px;"
@@ -113,7 +113,7 @@ export class TvApp extends LitElement {
           width="400"
           height="500"
           allowtransparency="true"
-          frameborder="20"
+          frameborder="0"
           sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
         ></iframe>
       </div>

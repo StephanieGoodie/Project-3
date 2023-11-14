@@ -61,11 +61,10 @@ export class TvApp extends LitElement {
           `
         )
       }
-      <div style= "display: inline-block;">
-      ${this.activeItem.name}
+      <div>
+      ${this.activeItem.title}
       ${this.activeItem.description}
         <!-- video -->
-        <div>
         <iframe
           width="750"
           height="400"
@@ -73,9 +72,8 @@ export class TvApp extends LitElement {
           frameborder="0"
           allowfullscreen
         ></iframe>
-        </div>
+        
         <!-- discord / chat - optional -->
-        <div style= "margin-right: 300;">
         <iframe
           src="https://discord.com/widget?id=YOUR_DISCORD_SERVER_ID&theme=dark"
           width="400"
@@ -84,11 +82,9 @@ export class TvApp extends LitElement {
           frameborder="0"
           sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
         ></iframe>
-        </div>
       </div>
       <!-- dialog -->
-      <sl-dialog label="Dialog" class="dialog">
-      ${this.activeItem.title},
+      <sl-dialog label="${this.activeItem.title}" class="dialog">
       ${this.activeItem.description}
         <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
       </sl-dialog>

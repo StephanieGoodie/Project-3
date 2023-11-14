@@ -39,6 +39,35 @@ export class TvApp extends LitElement {
         margin: 16px;
         padding: 16px;
       }
+      .listing-container {
+        justify-self: center;
+        max-width: 1344px;
+        justify-items: left;
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: auto;
+        padding-left: .5rem;
+        padding-right: .5rem;
+        text-rendering: optimizeLegibility;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        animation-delay: 1s;
+        animation-duration: 1s;
+        line-height: 1.5;
+        font-size: 1em;
+      }
+      .title-container{
+        position: relative;
+        align-self: center;
+        margin: 20px;
+      }
+      p {
+        font-size: 12px;
+      }
       `
     ];
   }
@@ -46,6 +75,7 @@ export class TvApp extends LitElement {
   render() {
     return html`
       <h2>${this.name}</h2>
+      <div class="listing-container">
       ${
         this.listings.map(
           (item) => html`
@@ -61,30 +91,38 @@ export class TvApp extends LitElement {
           `
         )
       }
+      </div>
       <div>
+        <div class="title-container">
       ${this.activeItem.title}
-      ${this.activeItem.description}
+    </div>
+    <div style="display: inline-flex">
         <!-- video -->
-        <iframe
+        <iframe style="margin: 30px;"
           width="750"
           height="400"
-          src="${this.createSource()}" 
+          src="https://www.youtube.com/embed/9MT-BNuUCpM" 
           frameborder="0"
           allowfullscreen
         ></iframe>
-        
+
+        <div>
         <!-- discord / chat - optional -->
-        <iframe
+        <iframe style=""
           src="https://discord.com/widget?id=YOUR_DISCORD_SERVER_ID&theme=dark"
           width="400"
-          height="800"
+          height="500"
           allowtransparency="true"
-          frameborder="0"
+          frameborder="20"
           sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
         ></iframe>
       </div>
+      </div>
+      ${this.activeItem.description}
+    </div>
       <!-- dialog -->
       <sl-dialog label="${this.activeItem.title}" class="dialog">
+
       ${this.activeItem.description}
         <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
       </sl-dialog>

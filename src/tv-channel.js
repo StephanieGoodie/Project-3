@@ -25,14 +25,31 @@ export class TvChannel extends LitElement {
   static get styles() {
     return css`
       :host {
-        display: inline-flex;
+        text-rendering: optimizeLegibility;
+        box-sizing: inherit;
+        display: inline-block;
+        line-height: 1.2;
+        font-size: 1em;
+        font-weight: 400;
+        min-width: 300px;
+        margin: 0;
+        padding: 0;
+        transition: all 0.25s ease-in-out;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .wrapper {
-        padding: 16px;
-        background-color: #eeeeee;
-        border-radius: 5px;
-        border-color: #1d1c1c;
-        border-width: 3px;
+        margin: .5rem;
+        padding: .5rem;
+        padding-left: 16px;
+        padding-right: 16px;
+        border-radius: 6px;
+        border-color: #4a4a4a;
+        box-shadow: 0px 0px 0px 1px #dbdbdb;
+        background-color: #ffffff;
+      }
+      p {
+        font-size: 12px;
       }
     `;
   }

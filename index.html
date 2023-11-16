@@ -40,6 +40,16 @@
   <script type="module">
     import "./src/tv-app.js";
     import "./src/tv-channel.js";
+
+    function updatePageContent(title, presenter, description) {
+      document.getElementById('pageTitle').innerText = title;
+      // Assuming you have an element with an ID for presenter and description
+      document.getElementById('presenter').innerText = presenter;
+      document.getElementById('description').innerText = description;
+    }
+
+    // Call the function with your active item data
+    updatePageContent("Active Item Title", "Active Item Presenter", "Active Item Description");
   </script>
 </body>
 

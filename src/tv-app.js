@@ -152,17 +152,25 @@ changeVideo() {
   }
 
   itemClick(e) {
-    console.log(e.target);
     this.activeItem = {
       title: e.target.title,
       id: e.target.id,
       description: e.target.description,
-      video: e.target.video, 
+      video: e.target.video,
     };
-    this.changeVideo(); // Call changeVideo 
+    this.changeVideo();
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.show();
-  }
+  
+    // Dispatch custom event with the updated activeItem
+    this.dispatchEvent(
+      new CustomEvent('active-item-changed', {
+        bubbles: true,
+        composed: true,
+        detail: { activeItem: this.activeItem },
+      })
+    );
+  }  
 
   // LitElement life cycle for when any property changes
   updated(changedProperties) {

@@ -26,9 +26,9 @@
 
 <body>
   <tv-app name="Happening-TV"></tv-app>
-  <h3>Demo of each element by itself</h3>
+  <h3 id="title">Demo of each element by itself</h3>
   <tv-channel title="HAX: Wordpress Killer" presenter="Bryan Ollendyke">
-    <p>HAX is a visual web builder for producing content in a “forever” format known as HTML, 
+    <p id= "description">HAX is a visual web builder for producing content in a “forever” format known as HTML, 
       with a wrinkle. Imagine being able to reprogram the <strong>strong</strong> tag. While silly, this would 
       fundamentally change the way you build and develop everything on the web. When we describe HTML as 
       forever, it’s because the HAX platform is literally a <strong>h-a-x</strong> tag in the browser that we can reprogram 
@@ -41,15 +41,22 @@
     import "./src/tv-app.js";
     import "./src/tv-channel.js";
 
-    function updatePageContent(title, presenter, description) {
-      document.getElementById('pageTitle').innerText = title;
-      // Assuming you have an element with an ID for presenter and description
-      document.getElementById('presenter').innerText = presenter;
+    function updatePageContent(title, author, description) {
+      document.getElementById('title').innerText = toString(this.activeItem.title);
+      document.getElementById('presenter').innerText = author;
       document.getElementById('description').innerText = description;
     }
 
-    // Call the function with your active item data
-    updatePageContent("Active Item Title", "Active Item Presenter", "Active Item Description");
+    const tvApp = document.getElementsByName("tv-app.js");
+
+    // Listen for changes in the activeItem and update the page content accordingly
+    tvApp.addEventListener('active-item-changed', (event) => {
+      //const { title, author, description } = event.detail.activeItem;
+      const title = event.detail.activeItem.title;
+      const author = event.detail.activeItem.author;
+      const description = event.detail.activeItem.description;
+      updatePageContent(title, author, description);
+    });
   </script>
 </body>
 

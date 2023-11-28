@@ -95,6 +95,7 @@ export class TvApp extends LitElement {
       <div>
         <h1 class="title-container">
       ${this.activeItem.title}
+      
     </h1>
     <div style="display: inline-flex">
         <!-- video -->
@@ -119,6 +120,16 @@ export class TvApp extends LitElement {
       </div>
       </div>
       ${this.activeItem.description}
+      <tv-channel title="HAX: Wordpress Killer" presenter="Bryan Ollendyke">
+    <p id= "description">HAX is a visual web builder for producing content in a “forever” format known as HTML, 
+      with a wrinkle. Imagine being able to reprogram the <strong>strong</strong> tag. While silly, this would 
+      fundamentally change the way you build and develop everything on the web. When we describe HTML as 
+      forever, it’s because the HAX platform is literally a <strong>h-a-x</strong> tag in the browser that we can reprogram 
+      after initial implementation. This means courses written in HAX 5 years ago, never touched by faculty,
+      leveraging advanced JS and CSS yet never known about by faculty, are more accessible, higher in usability,
+      load faster, and are easier to use by students with 0 additional effort by faculty or staff.
+    </p>
+  </tv-channel>
     </div>
       <!-- dialog -->
       <sl-dialog label="${this.activeItem.title}" class="dialog">

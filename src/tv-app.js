@@ -119,16 +119,17 @@ export class TvApp extends LitElement {
         ></iframe>
       </div>
       </div>
+
       <tv-channel title=${this.activeItem.title} presenter="${this.activeItem.author}">
-    <p id= "description">${this.activeItem.description}
-    </p>
+    <p id= "description">${this.activeItem.description} </p>
   </tv-channel>
+
     </div>
       <!-- dialog -->
       <sl-dialog label="${this.activeItem.title}" class="dialog">
 
       ${this.activeItem.description}
-        <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
+        <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">WATCH</sl-button>
       </sl-dialog>
     `;
   }
@@ -166,6 +167,7 @@ changeVideo() {
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.show();
   
+
     // Dispatch custom event with the updated activeItem
     this.dispatchEvent(
       new CustomEvent('active-item-changed', {

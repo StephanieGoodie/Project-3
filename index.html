@@ -28,26 +28,13 @@
   <tv-app name="Happening-TV"></tv-app>
   
   
+  
   <script type="module">
     import "./src/tv-app.js";
     import "./src/tv-channel.js";
-
-    function updatePageContent(title, author, description) {
-      document.getElementById('title').innerText = toString(this.activeItem.title);
-      document.getElementById('presenter').innerText = author;
-      document.getElementById('description').innerText = description;
-    }
-
     const tvApp = document.getElementsByName("tv-app.js");
 
-    // Listen for changes in the activeItem and update the page content accordingly
-    tvApp.addEventListener('active-item-changed', (event) => {
-      //const { title, author, description } = event.detail.activeItem;
-      const title = event.detail.activeItem.title;
-      const author = event.detail.activeItem.author;
-      const description = event.detail.activeItem.description;
-      updatePageContent(title, author, description);
-    });
+    
   </script>
 </body>
 

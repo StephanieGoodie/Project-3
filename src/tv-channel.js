@@ -47,6 +47,7 @@ export class TvChannel extends LitElement {
         border-color: #4a4a4a;
         box-shadow: 0px 0px 0px 1px #dbdbdb;
         background-color: #ffffff;
+        width: 900px;
       }
       p {
         font-size: 12px;

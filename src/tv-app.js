@@ -58,6 +58,7 @@ export class TvApp extends LitElement {
         animation-delay: 1s;
         animation-duration: 1s;
         line-height: 1.5;
+        height: 100%;
         font-size: 1em;
       }
       .title-container{
@@ -120,7 +121,7 @@ export class TvApp extends LitElement {
       </div>
       </div>
 
-      <tv-channel title=${this.activeItem.title} presenter="${this.activeItem.author}">
+      <tv-channel style="height= " title=${this.activeItem.title} presenter="${this.activeItem.author}">
     <p id= "description">${this.activeItem.description} </p>
   </tv-channel>
 

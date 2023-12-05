@@ -2,6 +2,7 @@
 import { LitElement, html, css } from 'lit';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
+import "@lrnwebcomponents/video-player/video-player.js";
 import "./tv-channel.js";
 
 export class TvApp extends LitElement {
@@ -58,9 +59,24 @@ export class TvApp extends LitElement {
         animation-delay: 1s;
         animation-duration: 1s;
         line-height: 1.5;
-        height: 100%;
-        font-size: 1em;
+        //height: 100%;
+        //font-size: 1em;
       }
+      .time-container{
+
+      }
+      .is-flex {
+    display: flex !important;
+}
+.is-align-items-center {
+    align-items: center !important;
+}
+.is-justify-content-center {
+    justify-content: center !important;
+}
+.is-flex-direction-column {
+    flex-direction: column !important;
+}
       .title-container{
         position: relative;
         align-self: center;
@@ -68,6 +84,14 @@ export class TvApp extends LitElement {
       }
       p {
         font-size: 12px;
+      }
+
+      video-player {
+        width: 100%;
+        height: auto;
+        max-width: 1000px; /* Adjust the max-width as needed */
+        border: 1px solid #ccc; /* Add border for a YouTube-like look */
+        border-radius: 8px; /* Add border-radius for rounded corners */
       }
       `
     ];
@@ -77,6 +101,7 @@ export class TvApp extends LitElement {
     return html`
       <h2>${this.name}</h2>
       <div class="listing-container">
+        
       ${
         this.listings.map(
           (item) => html`
@@ -100,14 +125,18 @@ export class TvApp extends LitElement {
     </h1>
     <div style="display: inline-flex">
         <!-- video -->
-        <iframe style="margin: 30px;"
+        <!--iframe id="video-player" style="margin: 30px;"
           width="750"
           height="400"
           src="https://www.youtube.com/embed/9MT-BNuUCpM" 
           frameborder="0"
           allowfullscreen
-        ></iframe>
-
+        ></iframe-->
+        <video-player id="video-player" source="https://www.youtube.com/embed/9MT-BNuUCpM" accent-color="orange" dark track="https://haxtheweb.org/files/HAXshort.vtt"
+        style="width= 750px; height= 400px;">
+</video-player>
+        
+        
         <div>
         <!-- discord / chat - optional -->
         <iframe style=""
@@ -128,16 +157,28 @@ export class TvApp extends LitElement {
     </div>
       <!-- dialog -->
       <sl-dialog label="${this.activeItem.title}" class="dialog">
-
-      ${this.activeItem.description}
-        <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">WATCH</sl-button>
+        ${this.activeItem.description}
+        <sl-button slot="footer" variant="primary" @click="${this.watchButtonClick}">WATCH</sl-button>
       </sl-dialog>
+
     `;
   }
-changeVideo() {
-    const iframe = this.shadowRoot.querySelector('iframe');
-    iframe.src = this.createSource();
+
+
+  watchButtonClick() {
+    this.changeVideo();
+    
+    
+    const dialog = this.shadowRoot.querySelector('.dialog');
+    dialog.hide();
   }
+
+changeVideo() {
+    const videoPlayer = this.shadowRoot.querySelector('video-player');
+    videoPlayer.source = this.createSource();
+    this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').play()
+  }
+
    extractVideoId(link) {
     try {
       const url = new URL(link);
@@ -164,10 +205,9 @@ changeVideo() {
       description: e.target.description,
       video: e.target.video,
     };
-    this.changeVideo();
+    //this.changeVideo();
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.show();
-  
 
     // Dispatch custom event with the updated activeItem
     this.dispatchEvent(

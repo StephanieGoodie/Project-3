@@ -19,6 +19,7 @@ export class TvChannel extends LitElement {
       description: {type: String},
       presenter: { type: String },
       video: {type: String},
+      timecode: {type: Number},
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -47,7 +48,7 @@ export class TvChannel extends LitElement {
         border-color: #4a4a4a;
         box-shadow: 0px 0px 0px 1px #dbdbdb;
         background-color: #ffffff;
-        width: 900px;
+        width: 950px;
       }
       p {
         font-size: 12px;
@@ -58,6 +59,7 @@ export class TvChannel extends LitElement {
   render() {
     return html`
       <div class="wrapper">
+        <h6>${this.timecode}</h6>
         <h3>${this.title}</h3>
         <h4>${this.presenter}</h4>
         <slot></slot>

@@ -62,36 +62,28 @@ export class TvApp extends LitElement {
         //height: 100%;
         //font-size: 1em;
       }
-      .time-container{
-
+      .timecode-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 10px;
+        padding: 5px;
+        color: white;
+        background-color: #384194;
+        border-radius: 5px;
+        z-index: 1; /* Ensure the timecode box is above other elements */
       }
-      .is-flex {
-    display: flex !important;
-}
-.is-align-items-center {
-    align-items: center !important;
-}
-.is-justify-content-center {
-    justify-content: center !important;
-}
-.is-flex-direction-column {
-    flex-direction: column !important;
-}
-      .title-container{
-        position: relative;
-        align-self: center;
-        margin: 20px;
-      }
+      
       p {
         font-size: 12px;
       }
 
       video-player {
-        width: 100%;
+        width: 750px;
         height: auto;
         max-width: 1000px; /* Adjust the max-width as needed */
-        border: 1px solid #ccc; /* Add border for a YouTube-like look */
-        border-radius: 8px; /* Add border-radius for rounded corners */
+        border: 1px solid #cccccc; /*for a YouTube-like look :) */
+        border-radius: 8px; /*border-radius for rounded corners */
       }
       `
     ];
@@ -101,7 +93,7 @@ export class TvApp extends LitElement {
     return html`
       <h2>${this.name}</h2>
       <div class="listing-container">
-        
+
       ${
         this.listings.map(
           (item) => html`
@@ -132,8 +124,8 @@ export class TvApp extends LitElement {
           frameborder="0"
           allowfullscreen
         ></iframe-->
-        <video-player id="video-player" source="https://www.youtube.com/embed/9MT-BNuUCpM" accent-color="orange" dark track="https://haxtheweb.org/files/HAXshort.vtt"
-        style="width= 750px; height= 400px;">
+        <video-player id="video-player" source="https://www.youtube.com/embed/9MT-BNuUCpM" accent-color="blue" dark track="https://haxtheweb.org/files/HAXshort.vtt"
+        >
 </video-player>
         
         
@@ -167,8 +159,6 @@ export class TvApp extends LitElement {
 
   watchButtonClick() {
     this.changeVideo();
-    
-    
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.hide();
   }

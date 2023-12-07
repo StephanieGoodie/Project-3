@@ -5,6 +5,7 @@ export class TvChannel extends LitElement {
   // defaults
   constructor() {
     super();
+    this.timecode = '';
     this.title = '';
     this.presenter = '';
   }

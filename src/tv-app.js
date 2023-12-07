@@ -99,6 +99,7 @@ export class TvApp extends LitElement {
           (item) => html`
             <tv-channel
               id="${item.id}"
+              timecode="${item.metadata.timecode}"
               title="${item.title}"
               presenter="${item.metadata.author}"
               description="${item.description}"

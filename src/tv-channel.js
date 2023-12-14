@@ -6,6 +6,7 @@ export class TvChannel extends LitElement {
   constructor() {
     super();
     this.timecode = '';
+    this.startTime = '';
     this.title = '';
     this.presenter = '';
   }
@@ -21,6 +22,8 @@ export class TvChannel extends LitElement {
       presenter: { type: String },
       video: {type: String},
       timecode: {type: Number},
+      startTime:{type: Number},
+      active: {type: Boolean, reflect: true}
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -28,19 +31,18 @@ export class TvChannel extends LitElement {
     return css`
       :host {
         text-rendering: optimizeLegibility;
-        box-sizing: inherit;
-        display: inline-block;
-        line-height: 1.2;
-        font-size: 1em;
+        //box-sizing: inherit;
+        line-height: 0;
+        //font-size: 15px;
         font-weight: 400;
         min-width: 300px;
+        width: 500px;   
         margin: 0;
         padding: 0;
         transition: all 0.25s ease-in-out;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
       .wrapper {
+        display: inline-flex;
         margin: .5rem;
         padding: .5rem;
         padding-left: 16px;
@@ -49,10 +51,27 @@ export class TvChannel extends LitElement {
         border-color: #4a4a4a;
         box-shadow: 0px 0px 0px 1px #dbdbdb;
         background-color: #ffffff;
-        width: 950px;
       }
+
       p {
         font-size: 12px;
+      }
+      .startTime{
+        display: inline-flex;
+        vertical-align: top;
+        padding: 16px;
+        margin: 0;
+       //background-color: lightblue;
+        //border-radius: 8px;
+        //height: 6px;
+      }
+
+      .startTime,
+      :host([active])  .startTime{
+        background-color: lightblue;
+        border-radius: 8px;
+        height: 6px;
+        display: block;
       }
     `;
   }
@@ -60,10 +79,13 @@ export class TvChannel extends LitElement {
   render() {
     return html`
       <div class="wrapper">
-        <h6>${this.timecode}</h6>
+      <div class="startTime">
+          ${this.startTime}</div>
+          <div style="display: block;">
+        <h6>${this.timecode} min</h6> 
         <h3>${this.title}</h3>
         <h4>${this.presenter}</h4>
-        <slot></slot>
+        <slot></slot></div>
       </div>  
       `;
   }

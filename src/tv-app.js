@@ -16,6 +16,8 @@ export class TvApp extends LitElement {
       title: null,
       id: null,
       description: null,
+      startTime: null,
+      presenter: null
     };
   }
   // convention I enjoy using to define the tag's name
@@ -54,26 +56,38 @@ export class TvApp extends LitElement {
         padding-right: .5rem;
         text-rendering: optimizeLegibility;
         width: 100%;
-        margin: 0 auto;
+        margin: 20 auto;
         position: relative;
         animation-delay: 1s;
         animation-duration: 1s;
-        line-height: 1.5;
-        //height: 100%;
-        //font-size: 1em;
+        line-height: 10%
+        font-size: 1em;
+        
       }
       .timecode-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        margin: 10px;
-        padding: 5px;
-        color: white;
-        background-color: #384194;
-        border-radius: 5px;
+        background-color: #005fa9;
+        border: 2px solid #005fa9;
+        border-radius: 3px;
+        color: #ededed;
+        //font-size: 25px;
+        font-weight: bold;
         z-index: 1; /* Ensure the timecode box is above other elements */
       }
       
+      description-container{
+        font-weight: 400;
+        min-width: 300px;
+        width: 500px;   
+        margin: .5rem;
+        padding: .5rem;
+        padding-left: 16px;
+        padding-right: 16px;
+        border-radius: 6px;
+        border-color: #4a4a4a;
+        box-shadow: 0px 0px 0px 1px #dbdbdb;
+        background-color: #ffffff;
+      }
+
       p {
         font-size: 12px;
       }
@@ -97,15 +111,17 @@ export class TvApp extends LitElement {
       ${
         this.listings.map(
           (item) => html`
-            <tv-channel
+            <tv-channel 
               id="${item.id}"
-              timecode="${item.metadata.timecode}"
               title="${item.title}"
               presenter="${item.metadata.author}"
               description="${item.description}"
               video="${item.metadata.source}"
               @click="${this.itemClick}"
+              timecode="${item.metadata.timecode}"
+              startTime="${item.metadata.timecode}"
             >
+            <!--div class="timecode-container" > ${item.metadata.timecode}</div-->
             </tv-channel>
           `
         )
@@ -117,14 +133,6 @@ export class TvApp extends LitElement {
       
     </h1>
     <div style="display: inline-flex">
-        <!-- video -->
-        <!--iframe id="video-player" style="margin: 30px;"
-          width="750"
-          height="400"
-          src="https://www.youtube.com/embed/9MT-BNuUCpM" 
-          frameborder="0"
-          allowfullscreen
-        ></iframe-->
         <video-player id="video-player" source="https://www.youtube.com/embed/9MT-BNuUCpM" accent-color="blue" dark track="https://haxtheweb.org/files/HAXshort.vtt"
         >
 </video-player>
@@ -143,9 +151,11 @@ export class TvApp extends LitElement {
       </div>
       </div>
 
-      <tv-channel style="height= " title=${this.activeItem.title} presenter="${this.activeItem.author}">
+      <description-container style="width: 900px;">
+      <h3>${this.activeItem.title}</h3>
+      <h4>${this.activeItem.presenter}</h4>
     <p id= "description">${this.activeItem.description} </p>
-  </tv-channel>
+  </description-container>
 
     </div>
       <!-- dialog -->
